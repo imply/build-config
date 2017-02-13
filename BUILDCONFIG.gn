@@ -68,16 +68,16 @@ if (host_toolchain == "") {
 
   if (host_os == "linux") {
     if (target_os != "linux") {
-      host_toolchain = "//build/linux:clang_$host_cpu"
+      host_toolchain = "//build/config/linux:clang_$host_cpu"
     } else {
-      host_toolchain = "//build/linux:$host_cpu"
+      host_toolchain = "//build/config/linux:$host_cpu"
     }
   } else if (host_os == "mac") {
-    host_toolchain = "//build/mac:clang_$host_cpu"
+    host_toolchain = "//build/config/mac:clang_$host_cpu"
   } else if (host_os == "win") {
     # On Windows always use the target CPU for host builds. On the
     # configurations we support this will always work and it saves build steps.
-    host_toolchain = "//build/win:$target_cpu"
+    host_toolchain = "//build/config/win:$target_cpu"
   } else {
     assert(false, "Unsupported host_os: $host_os")
   }
@@ -88,21 +88,21 @@ _default_toolchain = ""
 if (target_os == "android") {
   assert(host_os == "linux" || host_os == "mac",
          "Android builds are only supported on Linux and Mac hosts.")
-  _default_toolchain = "//build/android:$target_cpu"
+  _default_toolchain = "//build/config/android:$target_cpu"
 } else if (target_os == "chromeos" || target_os == "linux") {
-  _default_toolchain = "//build/linux:$target_cpu"
+  _default_toolchain = "//build/config/linux:$target_cpu"
 } else if (target_os == "ios") {
-  _default_toolchain = "//build/mac:ios_clang_$target_cpu"
+  _default_toolchain = "//build/config/mac:ios_clang_$target_cpu"
 } else if (target_os == "mac") {
   assert(host_os == "mac", "Mac cross-compiles are unsupported.")
   _default_toolchain = host_toolchain
 } else if (target_os == "win") {
   # On Windows we use the same toolchain for host and target by default.
   assert(target_os == host_os, "Win cross-compiles only work on win hosts.")
-  _default_toolchain = "//build/win:$target_cpu"
+  _default_toolchain = "//build/config/win:$target_cpu"
 } else if (target_os == "winrt_81" || target_os == "winrt_81_phone" ||
            target_os == "winrt_10") {
-  _default_toolchain = "//build/win:winrt_$target_cpu"
+  _default_toolchain = "//build/config/win:winrt_$target_cpu"
 } else {
   assert(false, "Unsupported target_os: $target_os")
 }
@@ -117,15 +117,15 @@ if (custom_toolchain != "") {
 
 if (is_win) {
   set_defaults("static_library") {
-    configs = [ "//build/win:default" ]
+    configs = [ "//build/config/win:default" ]
   }
 
   set_defaults("source_set") {
-    configs = [ "//build/win:default" ]
+    configs = [ "//build/config/win:default" ]
   }
 
   set_defaults("executable") {
-    configs = [ "//build/win:default" ]
+    configs = [ "//build/config/win:default" ]
   }
 }
 
