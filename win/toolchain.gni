@@ -14,9 +14,7 @@ assert(is_win)
 # list to us.
 
 # This tool will is used as a wrapper for various commands below.
-setup_toolchain_path = rebase_path("setup_toolchain.py", root_build_dir)
 tool_wrapper_path = rebase_path("tool_wrapper.py", root_build_dir)
-vs_toolchain_path = rebase_path("vs_toolchain.py", root_build_dir)
 
 # Copy the VS runtime DLL for the default toolchain to the root build directory
 # so things will run.
@@ -26,7 +24,7 @@ if (current_toolchain == default_toolchain) {
   } else {
     configuration_name = "Release"
   }
-  exec_script(vs_toolchain_path,
+  exec_script("vs_toolchain.py",
               [
                 "copy_dlls",
                 rebase_path(root_build_dir),

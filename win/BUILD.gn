@@ -53,7 +53,7 @@ config("default") {
 # since we don't do any 32-bit cross compiles when targeting 64-bit (the
 # build does generate some 64-bit stuff from 32-bit target builds).
 if (target_cpu == "x86") {
-  x86_toolchain_data = exec_script(setup_toolchain_path,
+  x86_toolchain_data = exec_script("setup_toolchain.py",
                                    [
                                      visual_studio_path,
                                      windows_sdk_path,
@@ -73,7 +73,7 @@ if (target_cpu == "x86") {
 }
 
 # 64-bit toolchains.
-x64_toolchain_data = exec_script(setup_toolchain_path,
+x64_toolchain_data = exec_script("setup_toolchain.py",
                                  [
                                    visual_studio_path,
                                    windows_sdk_path,
