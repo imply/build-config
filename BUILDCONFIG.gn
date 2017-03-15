@@ -124,6 +124,14 @@ if (is_win) {
     configs = [ "//build/config/win:default" ]
   }
 
+  set_defaults("shared_library") {
+    configs = [ "//build/config/win:default" ]
+  }
+
+  set_defaults("loadable_module") {
+    configs = [ "//build/config/win:default" ]
+  }
+
   set_defaults("executable") {
     configs = [ "//build/config/win:default" ]
   }
